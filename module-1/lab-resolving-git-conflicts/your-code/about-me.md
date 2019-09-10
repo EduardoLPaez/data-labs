@@ -1,1 +1,2 @@
-I wana take over the world. And I got eldritch horrors at my beck and call.
+E. L. P.
+made a eldritch monk in dnd.
