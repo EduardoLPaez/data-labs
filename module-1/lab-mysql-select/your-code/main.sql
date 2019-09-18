@@ -40,5 +40,12 @@ JOIN titles
 ON titles.title_id = titleauthor.title_id
 ORDER BY  YearToDateSales DESC;
 
+/*!bonus */
 
-
+SELECT   authors.au_id as AuthorID, authors.au_fname as FirstName,authors.au_lname as LastName, 
+FROM authors 
+JOIN titleauthor 
+ON authors.au_id = titleauthor.au_id 
+JOIN titles 
+ON titles.title_id = titleauthor.title_id
+ORDER BY YearToDateSales DESC limit 3;

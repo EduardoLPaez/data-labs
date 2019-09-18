@@ -1,5 +1,5 @@
 #1. Import the NUMPY package under the name np.
-
+import numpy as np
 
 
 #2. Print the NUMPY version and the configuration.
@@ -9,60 +9,76 @@
 #3. Generate a 2x3x5 3-dimensional array with random values. Assign the array to variable "a"
 # Challenge: there are at least three easy ways that use numpy to generate random arrays. How many ways can you find?
 
-
+a = np.random.random((2,3,5))
 
 #4. Print a.
 
-
+print (a)
 
 #5. Create a 5x2x3 3-dimensional array with all values equaling 1.
 #Assign the array to variable "b"
 
-
+b =np.ones((5,2,3))
 
 #6. Print b.
 
-
+print(b)
 
 #7. Do a and b have the same size? How do you prove that in Python code?
 
-
+if b.size == a.size:
+        print ("\nsame size=",True)
+else:
+        print ('\nsame size =',False)
 
 
 #8. Are you able to add a and b? Why or why not?
-
-
+try:
+        sum(a,b)
+except:
+        print ("\n\n cannot add numpy arrays with different shapes. \n\n")
 
 #9. Transpose b so that it has the same structure of a (i.e. become a 2x3x5 array). Assign the transposed array to varialbe "c".
 
-
-
+# c = np.transpose(b)
+# print(c.shape,"issues transposing need to find why")
+c = np.tile(1,(2,3,5))
+print(a)
 #10. Try to add a and c. Now it should work. Assign the sum to varialbe "d". But why does it work now?
 
-
+try:
+        d = np.add(a,c)
+except:
+        print ("\n\n cannot add numpy arrays with different shapes. \n\n")
 
 #11. Print a and d. Notice the difference and relation of the two array in terms of the values? Explain.
+print (d)
 
-
-
+#random values are originally defined as numbers between 1 and 0, by summing two "random" 
+#arrays it become between 2 and 0.
 
 #12. Multiply a and c. Assign the result to e.
 
-
+e = np.multiply(a,c)
 
 #13. Does e equal to a? Why or why not?
 
-
+if (a==e).all:
+        print ("\ne=ax1. . .\nif e!=a there is a problem...")
+else:
+        print("\n\nyou are multipliying an array of random values between 1 and 0 by 1. and failing. . .  \n\n")
 
 
 #14. Identify the max, min, and mean values in d. Assign those values to variables "d_max", "d_min", and "d_mean"
 
-
+d_max  = np.max(d)
+d_min  = np.min(d)
+d_mean = np.mean(d)
 
 
 #15. Now we want to label the values in d. First create an empty array "f" with the same shape (i.e. 2x3x5) as d using `np.empty`.
 
-
+f = np.empty(d.shape)
 
 
 """
@@ -75,6 +91,24 @@ In the end, f should have only the following values: 0, 25, 50, 75, and 100.
 Note: you don't have to use Numpy in this question.
 """
 
+# sizetup = d.shape
+for i in range(2):
+        for h in range(3):
+                for g in range(5):
+                        if d_min< d[i-1][h-1][g-1] and d[i-1][h-1][g-1] < d_mean:
+                                f[i-1][h-1][g-1] =25
+                        elif d_max> d[i-1][h-1][g-1] and d[i-1][h-1][g-1] > d_mean:
+                                f[i-1][h-1][g-1] =75
+                        elif d[i-1][h-1][g-1] == d_mean:
+                                f[i-1][h-1][g-1]=50
+                        elif d[i-1][h-1][g-1] == d_max:
+                                f[i-1][h-1][g-1] =100 
+                        else:
+                                f[i-1][h-1][g-1] =0 
+#np.append(25, f[0][0][0])#np.where(d_min< d.any() and d.any() < d_mean,))
+# np.append(50, np.where(d.any() == d_mean,))
+# np.append(100, np.where(d.any() == d_max))
+# np.append(0, np.where(d.any()<2))
 
 
 
@@ -98,8 +132,7 @@ array([[[ 75.,  75.,  75.,  25.,  75.],
         [ 75.,  75.,  75.,  75.,  75.],
         [ 25.,  75.,   0.,  75.,  75.]]])
 """
-
-
+print(f)
 """
 #18. Bonus question: instead of using numbers (i.e. 0, 25, 50, 75, and 100), how to use string values 
 ("A", "B", "C", "D", and "E") to label the array elements? You are expecting the result to be:
@@ -112,3 +145,20 @@ array([[[ 'D',  'D',  'D',  'B',  'D'],
         [ 'B',  'D',   'A',  'D', 'D']]])
 Again, you don't need Numpy in this question.
 """
+#as the above, but remmber t convert it to string at generation.
+bonus = np.empty(d.shape)
+bonus = bonus.astype(str)
+for i in range(2):
+        for h in range(3):
+                for g in range(5):
+                        if d_min< d[i-1][h-1][g-1] and d[i-1][h-1][g-1] < d_mean:
+                                bonus[i-1][h-1][g-1] ='d'
+                        elif d_max> d[i-1][h-1][g-1] and d[i-1][h-1][g-1] > d_mean:
+                                bonus[i-1][h-1][g-1] ='b'
+                        elif d[i-1][h-1][g-1] == d_mean:
+                                bonus[i-1][h-1][g-1]='c'
+                        elif d[i-1][h-1][g-1] == d_max:
+                                bonus[i-1][h-1][g-1] ='a'
+                        else:
+                                bonus[i-1][h-1][g-1] ='f'
+print(bonus)
